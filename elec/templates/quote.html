@@ -1,0 +1,133 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<style>
+/* Page Background */
+.quote-section {
+    background: linear-gradient(135deg, #f0f7ff, #ffffff);
+    padding: 60px 20px;
+    border-radius: 12px;
+}
+
+/* Form Container */
+.quote-form {
+    max-width: 650px;
+    background: #ffffff;
+    border-radius: 14px;
+    padding: 30px;
+    margin: 0 auto;
+    box-shadow: 0 6px 20px rgba(0,0,0,0.08);
+}
+
+/* Inputs */
+.quote-form input,
+.quote-form select,
+.quote-form textarea {
+    width: 100%;
+    padding: 14px;
+    border-radius: 8px;
+    border: 1px solid #cfd8e3;
+    font-size: 15px;
+    background: #fdfdfd;
+    transition: border-color .2s, box-shadow .2s;
+}
+
+.quote-form input:focus,
+.quote-form select:focus,
+.quote-form textarea:focus {
+    outline: none;
+    border-color: #4cc3ff;
+    box-shadow: 0 0 0 3px rgba(76,195,255,0.25);
+}
+
+/* Submit Button */
+.quote-form button {
+    padding: 14px;
+    background: #007bff;
+    color: #fff;
+    font-size: 16px;
+    font-weight: 600;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background .25s ease, transform .2s;
+}
+
+.quote-form button:hover {
+    background: #005fcc;
+    transform: translateY(-2px);
+}
+
+/* Title */
+.quote-title {
+    text-align: center;
+    font-size: 32px;
+    font-weight: 700;
+    color: #00315c;
+    margin-bottom: 10px;
+}
+
+/* Description */
+.quote-description {
+    text-align: center;
+    max-width: 600px;
+    margin: 0 auto 30px;
+    color: #555;
+}
+
+/* Mobile adjustments */
+@media (max-width: 768px) {
+    .quote-form {
+        padding: 20px;
+    }
+}
+</style>
+
+{% with messages = get_flashed_messages(with_categories=true) %}
+  {% if messages %}
+    <div class="container mt-4 fade-in">
+      {% for category, message in messages %}
+        <div class="alert alert-{{ category }} alert-dismissible fade show">
+          {{ message }}
+          <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+        </div>
+      {% endfor %}
+    </div>
+  {% endif %}
+{% endwith %}
+
+<div class="quote-section">
+
+    <h1 class="quote-title">Request a Quote</h1>
+    <p class="quote-description">
+        Fill out the form below and our team will contact you with a quote for your project.
+    </p>
+
+    <form action="/quote" method="POST" enctype="multipart/form-data" class="quote-form">
+        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+
+        <input type="text" name="name" placeholder="Your Name" required>
+        <input type="email" name="email" placeholder="Your Email" required>
+        <input type="text" name="phone" placeholder="Phone Number" required>
+
+        <select name="service_type" required>
+            <option value="">Select Service</option>
+            <option value="Electrical">Electrical</option>
+            <option value="CCTV">CCTV & Security</option>
+            <option value="Solar">Solar</option>
+            <option value="Interior">Interior Decoration</option>
+        </select>
+
+        <input type="text" name="location" placeholder="Project Location" required>
+
+        <textarea name="description" placeholder="Project Details" rows="4" required></textarea>
+
+        <input type="file" name="image" accept="image/*">
+
+        <button type="submit">Submit Request</button>
+    </form>
+
+</div>
+
+{% endblock %}

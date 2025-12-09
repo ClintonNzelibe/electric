@@ -1,0 +1,120 @@
+{% extends "admin/admin_base.html" %}
+
+{% block content %}
+
+<div class="container mt-4">
+
+    <h2 class="mb-4 fw-bold">Admin Dashboard</h2>
+
+    <!-- Top Action Cards -->
+    <div class="row">
+
+        <!-- Projects -->
+        <div class="col-md-4 mb-4">
+            <div class="card shadow border-0">
+                <div class="card-body text-center">
+                    <h5 class="card-title fw-semibold">Projects</h5>
+                    <p class="card-text text-muted">View, add & update completed projects.</p>
+                    <a href="{{ url_for('admin.admin_projects') }}" class="btn btn-primary">Manage Projects</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Quotes -->
+        <div class="col-md-4 mb-4">
+            <div class="card shadow border-0">
+                <div class="card-body text-center">
+                    <h5 class="card-title fw-semibold">Quote Requests</h5>
+                    <p class="card-text text-muted">View incoming customer quotes.</p>
+                    <a href="{{ url_for('admin.admin_quotes') }}" class="btn btn-primary">View Requests</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Messages -->
+        <div class="col-md-4 mb-4">
+            <div class="card shadow border-0">
+                <div class="card-body text-center">
+                    <h5 class="card-title fw-semibold">Messages</h5>
+                    <p class="card-text text-muted">Customer contact form messages.</p>
+                    <a href="{{ url_for('admin.admin_messages') }}" class="btn btn-primary">View Messages</a>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Settings -->
+    <div class="row">
+        <div class="col-md-4 mb-4">
+            <div class="card shadow border-0">
+                <div class="card-body text-center">
+                    <h5 class="card-title fw-semibold">Settings</h5>
+                    <p class="card-text text-muted">Update company details and configurations.</p>
+                    <a href="{{ url_for('admin.admin_settings') }}" class="btn btn-primary">Open Settings</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Statistics -->
+    <h3 class="mt-5 fw-bold">Statistics Overview</h3>
+
+    <div class="row mt-3">
+
+        <div class="col-md-4 mb-3">
+            <div class="card text-center shadow-sm border-0 p-3">
+                <h4 class="fw-semibold">Projects</h4>
+                <p class="display-6 fw-bold">{{ total_projects }}</p>
+            </div>
+        </div>
+
+        <div class="col-md-4 mb-3">
+            <div class="card text-center shadow-sm border-0 p-3">
+                <h4 class="fw-semibold">Quotes</h4>
+                <p class="display-6 fw-bold">{{ total_quotes }}</p>
+            </div>
+        </div>
+
+        <div class="col-md-4 mb-3">
+            <div class="card text-center shadow-sm border-0 p-3">
+                <h4 class="fw-semibold">Messages</h4>
+                <p class="display-6 fw-bold">{{ total_messages }}</p>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Recent Quotes -->
+    <h3 class="mt-5 fw-bold">Recent Quote Requests</h3>
+
+    <div class="table-responsive mt-3">
+        <table class="table table-bordered">
+            <thead class="table-light">
+                <tr>
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th>Service</th>
+                    <th>Phone</th>
+                    <th>Date</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                {% for q in recent_quotes %}
+                <tr>
+                    <td>{{ q.id }}</td>
+                    <td>{{ q.name }}</td>
+                    <td>{{ q.service_type }}</td>
+                    <td>{{ q.phone }}</td>
+                    <td>{{ q.date_created.strftime('%Y-%m-%d') }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+
+        </table>
+    </div>
+
+</div>
+
+{% endblock %}

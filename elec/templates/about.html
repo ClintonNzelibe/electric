@@ -1,0 +1,198 @@
+{% extends "base.html" %}
+{% block content %}
+
+<!-- ICONS (Remix Icon CDN) -->
+<link href="https://cdn.jsdelivr.net/npm/remixicon/fonts/remixicon.css" rel="stylesheet">
+
+<style>
+.about-wrapper {
+    background:
+        linear-gradient(rgba(0,0,0,0.45), rgba(0,0,0,0.45)),
+        url("{{ url_for('static', filename='image/abt.avif') }}");
+
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+
+    padding: 90px 20px;
+    font-family: "Segoe UI", sans-serif;
+    color: white;
+}
+
+/* Heading */
+.about-title {
+    font-size: 2.8rem;
+    font-weight: 700;
+    color: #fff;
+    text-align: center;
+    margin-bottom: 20px;
+    animation: fadeInDown 0.9s ease;
+}
+
+.about-intro {
+    text-align: center;
+    max-width: 850px;
+    margin: 0 auto 60px auto;
+    font-size: 1.15rem;
+    color: #eee;
+    line-height: 1.7;
+    animation: fadeIn 1.2s ease;
+}
+
+/* Grid */
+.about-grid {
+    display: grid;
+    gap: 35px;
+    max-width: 1100px;
+    margin: 0 auto;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+}
+
+/* Floating Glass Cards */
+.about-card {
+    background: rgba(255,255,255,0.12);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255,255,255,0.3);
+
+    border-radius: 16px;
+    padding: 35px 25px;
+    text-align: center;
+
+    box-shadow: 0 10px 35px rgba(0,0,0,0.25);
+    transition: all 0.3s ease;
+    animation: fadeUp 1s ease;
+}
+
+.about-card:hover {
+    transform: translateY(-12px) scale(1.03);
+    box-shadow: 0 20px 45px rgba(0,0,0,0.35);
+}
+
+/* Icons */
+.about-icon {
+    font-size: 50px;
+    color: #00a2ff;
+    margin-bottom: 15px;
+}
+
+/* Text */
+.about-card h3 {
+    font-size: 1.6rem;
+    font-weight: 600;
+    color: #fff;
+    margin-bottom: 10px;
+}
+
+.about-card p {
+    color: #e5e5e5;
+    line-height: 1.6;
+}
+
+/* Animations */
+@keyframes fadeIn {
+    from {opacity: 0;}
+    to {opacity: 1;}
+}
+
+@keyframes fadeInDown {
+    from {opacity: 0; transform: translateY(-25px);}
+    to {opacity: 1; transform: translateY(0);}
+}
+
+@keyframes fadeUp {
+    from {opacity: 0; transform: translateY(25px);}
+    to {opacity: 1; transform: translateY(0);}
+}
+/* Responsive fixes */
+@media (max-width: 768px) {
+
+    .about-title {
+        font-size: 2.2rem;
+    }
+
+    .about-intro {
+        font-size: 1rem;
+        padding: 0 10px;
+    }
+
+    .about-card {
+        padding: 25px 20px;
+    }
+
+    .about-icon {
+        font-size: 38px;
+    }
+
+    .about-card h3 {
+        font-size: 1.3rem;
+    }
+
+    .about-card p {
+        font-size: 0.95rem;
+    }
+}
+
+@media (max-width: 480px) {
+
+    .about-title {
+        font-size: 1.9rem;
+    }
+
+    .about-intro {
+        font-size: 0.95rem;
+    }
+
+    .about-wrapper {
+        padding: 60px 10px;
+        background-attachment: scroll; /* parallax off on small phones */
+    }
+}
+
+</style>
+
+<div class="about-wrapper">
+
+    <h1 class="about-title">About Us</h1>
+
+    <p class="about-intro">
+        PowerHouse Tech & Decor is dedicated to delivering outstanding electrical,
+        security, solar, and interior decoration services across Nigeria. 
+        Our certified team ensures that every project is safe, modern, and built to perfection.
+    </p>
+
+    <div class="about-grid">
+
+        <div class="about-card">
+            <i class="ri-focus-line about-icon"></i>
+
+            <h3>Our Mission</h3>
+            <p>
+                To provide safe, reliable, and stylish solutions that improve homes and businesses,
+                ensuring comfort, security, and efficiency.
+            </p>
+        </div>
+
+        <div class="about-card">
+            <i class="ri-eye-line about-icon"></i>
+            <h3>Our Vision</h3>
+            <p>
+                To become the leading provider of modern electrical and interior services in Nigeria,
+                known for innovation and trust.
+            </p>
+        </div>
+
+        <div class="about-card">
+            <i class="ri-team-line about-icon"></i>
+            <h3>Our Team</h3>
+            <p>
+                A group of trained electricians, decorators, technicians, and installers dedicated to
+                delivering excellent workmanship on every project.
+            </p>
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}

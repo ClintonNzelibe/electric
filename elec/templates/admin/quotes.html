@@ -1,0 +1,59 @@
+{% extends "admin/admin_base.html" %}
+
+{% block content %}
+<div class="container mt-4">
+
+    <h2 class="mb-4">Quote Requests</h2>
+
+    <table class="table table-bordered table-striped">
+        <thead>
+            <tr>
+                <th>#</th>
+                <th>Name</th>
+                <th>Service</th>
+                <th>Phone</th>
+                <th>Location</th>
+                <th>Image</th>
+                <th>Date</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+
+        <tbody>
+        {% for q in quotes %}
+            <tr>
+                <td>{{ loop.index }}</td>
+                <td>{{ q.name }}</td>
+                <td>{{ q.service_type }}</td>
+                <td>{{ q.phone }}</td>
+                <td>{{ q.location }}</td>
+                <td>
+                    {% if q.image %}
+                        <img src="{{ url_for('static', filename='uploads/' ~ q.image) }}" width="80">
+                    {% endif %}
+                </td>
+                <td>{{ q.date_created.strftime('%Y-%m-%d') }}</td>
+
+                <td>
+                    <!-- VIEW BUTTON -->
+                    <a href="{{ url_for('admin.admin_view_quote', id=q.id) }}" 
+
+                       class="btn btn-sm btn-primary">
+                        View
+                    </a>
+
+                    <!-- DELETE BUTTON -->
+                    <a href="{{ url_for('admin.delete_quote', id=q.id) }}"
+
+                       class="btn btn-sm btn-danger"
+                       onclick="return confirm('Delete this quote?')">
+                        Delete
+                    </a>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+</div>
+{% endblock %}

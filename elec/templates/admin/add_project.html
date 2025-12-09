@@ -1,0 +1,44 @@
+{% extends "admin/admin_base.html" %}
+{% block content %}
+<h2 class="mb-4">Add New Project</h2>
+<form method="POST" enctype="multipart/form-data">
+     <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+    <div class="mb-3">
+        <label class="form-label">Title</label>
+        <input type="text" name="title" class="form-control" required>
+    </div>
+
+    <div class="mb-3">
+        <label class="form-label">Category</label>
+        <select name="category" class="form-select" required>
+            <option value="Electrical">Electrical</option>
+            <option value="Interior Decoration">Interior Decoration</option>
+            <option value="CCTV Installation">CCTV Installation</option>
+            <option value="Solar Setup">Solar Setup</option>
+            <option value="General Maintenance">General Maintenance</option>
+        </select>
+    </div>
+
+    <div class="mb-3">
+        <label class="form-label">Location</label>
+        <input type="text" name="location" class="form-control">
+    </div>
+
+    <div class="mb-3">
+        <label class="form-label">Description</label>
+        <textarea name="description" class="form-control" rows="4"></textarea>
+    </div>
+
+    <div class="mb-3">
+        <label class="form-label">Before Image</label>
+        <input type="file" name="before_image" class="form-control">
+    </div>
+
+    <div class="mb-3">
+        <label class="form-label">After Image</label>
+        <input type="file" name="after_image" class="form-control">
+    </div>
+
+    <button type="submit" class="btn btn-success">Add Project</button>
+</form>
+{% endblock %}

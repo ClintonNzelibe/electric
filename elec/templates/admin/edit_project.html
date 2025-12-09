@@ -1,0 +1,50 @@
+{% extends "admin/admin_base.html" %}
+{% block content %}
+<h2 class="mb-4">Edit Project</h2>
+<form method="POST" enctype="multipart/form-data">
+     <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+    <div class="mb-3">
+        <label class="form-label">Title</label>
+        <input type="text" name="title" value="{{ project.title }}" class="form-control" required>
+    </div>
+
+    <div class="mb-3">
+        <label class="form-label">Category</label>
+        <select name="category" class="form-select" required>
+            <option value="Electrical" {% if project.category == 'Electrical' %}selected{% endif %}>Electrical</option>
+            <option value="Interior Decoration" {% if project.category == 'Interior Decoration' %}selected{% endif %}>Interior Decoration</option>
+            <option value="CCTV Installation" {% if project.category == 'CCTV Installation' %}selected{% endif %}>CCTV Installation</option>
+            <option value="Solar Setup" {% if project.category == 'Solar Setup' %}selected{% endif %}>Solar Setup</option>
+            <option value="General Maintenance" {% if project.category == 'General Maintenance' %}selected{% endif %}>General Maintenance</option>
+        </select>
+    </div>
+
+    <div class="mb-3">
+        <label class="form-label">Location</label>
+        <input type="text" name="location" value="{{ project.location }}" class="form-control">
+    </div>
+
+    <div class="mb-3">
+        <label class="form-label">Description</label>
+        <textarea name="description" class="form-control" rows="4">{{ project.description }}</textarea>
+    </div>
+
+    <div class="mb-3">
+        <label class="form-label">Before Image</label>
+        {% if project.before_image %}
+            <img src="{{ url_for('static', filename='uploads/' + project.before_image) }}" class="img-thumbnail mb-2" width="100"><br>
+        {% endif %}
+        <input type="file" name="before_image" class="form-control">
+    </div>
+
+    <div class="mb-3">
+        <label class="form-label">After Image</label>
+        {% if project.after_image %}
+            <img src="{{ url_for('static', filename='uploads/' + project.after_image) }}" class="img-thumbnail mb-2" width="100"><br>
+        {% endif %}
+        <input type="file" name="after_image" class="form-control">
+    </div>
+
+    <button type="submit" class="btn btn-primary">Update Project</button>
+</form>
+{% endblock %}

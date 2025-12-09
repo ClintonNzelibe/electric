@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Demo Login</title>
+
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        background: #f3f4f6;
+        margin: 0;
+        padding: 0;
+    }
+
+    .container {
+        max-width: 380px;
+        margin: 60px auto;
+        padding: 25px 20px;
+        background: #fff;
+        border-radius: 8px;
+        box-shadow: 0px 2px 8px rgba(0,0,0,0.08);
+    }
+
+    input {
+        width: 100%;
+        padding: 14px;
+        margin-top: 15px;
+        border: 1px solid #c6c6c6;
+        border-radius: 6px;
+        font-size: 15px;
+    }
+
+    .forgot {
+        margin-top: 10px;
+        font-size: 14px;
+        color: #0b66ff;
+        cursor: pointer;
+    }
+
+    .btn-login {
+        width: 100%;
+        background: #0b66ff;
+        color: #fff;
+        padding: 14px;
+        border: none;
+        margin-top: 18px;
+        border-radius: 24px;
+        font-size: 16px;
+        cursor: pointer;
+    }
+
+    .or-section {
+        display: flex;
+        align-items: center;
+        text-align: center;
+        margin: 20px 0;
+        color: #6f6f6f;
+        font-size: 14px;
+    }
+
+    .or-section::before,
+    .or-section::after {
+        content: "";
+        flex: 1;
+        border-bottom: 1px solid #ddd;
+    }
+
+    .or-section::before {
+        margin-right: 12px;
+    }
+
+    .or-section::after {
+        margin-left: 12px;
+    }
+
+    .btn-signup {
+        width: 100%;
+        padding: 13px;
+        border: 2px solid #000;
+        border-radius: 24px;
+        background: #fff;
+        font-size: 16px;
+        cursor: pointer;
+    }
+
+    /* NEW LANGUAGE STYLE (replaces the old one) */
+    .language-section {
+        display: flex;
+        justify-content: center;
+        margin-top: 20px;
+    }
+
+    .language-bar {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 6px;
+        font-size: 12px;
+        padding: 4px 8px;
+        border: 1px solid #ddd;
+        background: #fff;
+        border-radius: 8px;
+        width: fit-content;
+    }
+
+    .language-bar img {
+        width: 18px;
+        border-radius: 3px;
+    }
+
+    .language-bar .active {
+        font-weight: bold;
+    }
+
+    .language-bar .divider {
+        color: #aaa;
+        font-size: 11px;
+    }
+
+    .language-bar .arrow {
+        font-size: 10px;
+        margin-right: -2px;
+    }
+
+    .language-bar .lang {
+        cursor: pointer;
+    }
+
+    footer {
+        text-align: center;
+        font-size: 12px;
+        margin-top: 20px;
+        color: #777;
+    }
+</style>
+</head>
+<body>
+
+<div class="container">
+
+    <input type="text" placeholder="Email or mobile number">
+    <input type="password" placeholder="Password">
+
+    <div class="forgot">Forgot password?</div>
+
+    <button class="btn-login">Log In</button>
+
+    <div class="or-section">or</div>
+
+    <button class="btn-signup">Sign Up</button>
+
+    <!-- NEW LANGUAGE BAR INSERTED HERE -->
+    <div class="language-section">
+        <div class="language-bar" role="navigation" aria-label="language selector">
+
+            <img src="https://upload.wikimedia.org/wikipedia/en/a/a4/Flag_of_the_United_States.svg" alt="US flag">
+
+            <span class="arrow">▼</span>
+            <span class="active">English</span>
+            <span class="divider">|</span>
+
+            <span class="lang">Français</span>
+            <span class="divider">|</span>
+
+            <span class="lang">Español</span>
+            <span class="divider">|</span>
+
+            <span class="lang">中文</span>
+        </div>
+    </div>
+
+</div>
+
+<footer>
+    Contact Us • Privacy • Legal • Policy Updates • Worldwide
+</footer>
+
+</body>
+</html>
+

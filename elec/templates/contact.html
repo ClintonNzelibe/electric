@@ -1,0 +1,279 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<!-- ======= PAGE STYLING ======= -->
+<style>
+    /* Fade In */
+    .fade-in {
+        opacity: 0;
+        transform: translateY(20px);
+        animation: fadeInUp .7s ease forwards;
+    }
+    @keyframes fadeInUp {
+        to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* Hover animation */
+    .contact-card {
+        transition: transform .25s ease, box-shadow .25s ease;
+    }
+    .contact-card:hover {
+        transform: translateY(-6px);
+        box-shadow: 0 12px 28px rgba(0,0,0,0.15);
+    }
+
+    /* Icon */
+    .icon-box {
+        font-size: 42px;
+        color: var(--accent, #4cc3ff);
+        margin-bottom: 12px;
+    }
+
+    /* Form background */
+    .contact-form {
+        background: linear-gradient(135deg, #012040, #014a7f);
+        color: white;
+        border-radius: 12px;
+    }
+    .contact-form input,
+    .contact-form textarea {
+        background: rgba(255,255,255,0.15);
+        border: none;
+        color: white;
+    }
+    .contact-form input::placeholder,
+    .contact-form textarea::placeholder {
+        color: #e0e0e0;
+    }
+    .contact-form input:focus,
+    .contact-form textarea:focus {
+        background: rgba(255,255,255,0.25);
+        border: 1px solid var(--accent, #4cc3ff);
+        color: #fff;
+        box-shadow: none;
+    }
+
+    /* Breadcrumb */
+    .breadcrumb-container {
+        background: #f5f7fb;
+        padding: 12px 20px;
+        border-radius: 8px;
+        font-size: 15px;
+    }
+
+    /* Hero */
+    .contact-hero {
+        background-image: url('{{ url_for("static", filename="uploads/" ~ settings.hero_image_filename) }}');
+        background-size: cover;
+        background-position: center;
+        padding: 90px 0;
+        text-align: center;
+        position: relative;
+        color: white;
+    }
+    .contact-hero::after {
+        content:"";
+        position:absolute;
+        top:0; left:0; width:100%; height:100%;
+        background: rgba(0,0,0,0.55);
+    }
+    .contact-hero > * {
+        position: relative;
+        z-index: 2;
+    }
+   
+/* Contact Cards Colors & Hover */
+.contact-card {
+    transition: transform .25s ease, box-shadow .25s ease, background .3s ease;
+    border-radius: 12px;
+    color: white;
+}
+
+/* Base colors */
+.contact-card.phone { background: #014a7f; }       /* Blue */
+.contact-card.email { background: #4cc3ff; color:#014a7f; } /* Light Blue */
+.contact-card.address { background: #ff7f50; }    /* Coral */
+.contact-card.whatsapp { background: #25D366; }   /* WhatsApp green */
+
+/* Hover effects */
+.contact-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 14px 30px rgba(0,0,0,0.25);
+    filter: brightness(1.1);
+}
+
+/* Icon styling */
+.icon-box {
+    font-size: 42px;
+    margin-bottom: 12px;
+    opacity: 0.9;
+}
+
+/* Text inside colored cards */
+.contact-card p, .contact-card h5 {
+    color: white;
+}
+.contact-card.email p, .contact-card.email h5 { color:#014a7f; }
+
+/* Responsive spacing */
+@media(max-width:768px){
+    .contact-card { margin-bottom:20px; }
+}
+
+
+</style>
+
+<!-- ===== HERO SECTION ===== -->
+<div class="contact-hero fade-in">
+    <h1 class="fw-bold">{{ settings.company_name }} – Contact Us</h1>
+    <p class="text-light">We’re here to help you with electrical, solar, CCTV & interior design services.</p>
+</div>
+
+<!-- ===== BREADCRUMBS ===== -->
+<div class="container mt-4 fade-in">
+    <div class="breadcrumb-container">
+        <a href="{{ url_for('user.home') }}" class="text-decoration-none">Home</a> › Contact
+    </div>
+</div>
+
+<!-- ===== CONTACT CARDS ===== -->
+<div class="container mt-5 fade-in">
+    <div class="row g-4 justify-content-center">
+
+        <!-- Phone -->
+        <div class="col-12 col-sm-6 col-md-3">
+            <div class="card shadow-sm contact-card phone text-center p-4 h-100">
+                <div class="icon-box"><i class="bi bi-telephone"></i></div>
+                <h5 class="fw-bold">Phone</h5>
+                <p>{{ settings.phone }}</p>
+            </div>
+        </div>
+
+        <!-- Email -->
+        <div class="col-12 col-sm-6 col-md-3">
+            <div class="card shadow-sm contact-card email text-center p-4 h-100">
+                <div class="icon-box"><i class="bi bi-envelope"></i></div>
+                <h5 class="fw-bold">Email</h5>
+                <p>{{ settings.email }}</p>
+            </div>
+        </div>
+
+      <!-- Instagram -->
+<div class="col-12 col-sm-6 col-md-3">
+    <div class="card shadow-sm contact-card address text-center p-4 h-100" style="background:#E1306C;">
+        <div class="icon-box"><i class="bi bi-instagram"></i></div>
+        <h5 class="fw-bold">Instagram</h5>
+        <p>
+            <a href="{{ settings.instagram }}" 
+               target="_blank" 
+               class="text-decoration-none text-white">
+               Visit Page →
+            </a>
+        </p>
+    </div>
+</div>
+
+
+        <!-- WhatsApp -->
+    <!-- WhatsApp -->
+<div class="col-12 col-sm-6 col-md-3">
+    <div class="card shadow-sm contact-card whatsapp text-center p-4 h-100" style="background:#25D366;">
+        <div class="icon-box"><i class="bi bi-whatsapp"></i></div>
+        <h5 class="fw-bold">WhatsApp</h5>
+
+        <p>
+            <a href="https://wa.me/{{ settings.whatsapp_number|replace('+','') }}" target="_blank" 
+               class="text-decoration-none text-white">
+                Chat with us →
+            </a>
+        </p>
+
+    </div>
+</div>
+
+
+    </div>
+</div>
+
+
+<!-- FLASH MESSAGES -->
+{% with messages = get_flashed_messages(with_categories=true) %}
+  {% if messages %}
+    <div class="container mt-4 fade-in">
+      {% for category, message in messages %}
+        <div class="alert alert-{{ category }} alert-dismissible fade show">
+          {{ message }}
+          <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+        </div>
+      {% endfor %}
+    </div>
+  {% endif %}
+{% endwith %}
+
+<!-- ===== CONTACT FORM ===== -->
+<div class="container mt-5 mb-5 fade-in">
+    <div class="card shadow-lg border-0 p-4 contact-form">
+
+        <h3 class="mb-4 text-center">Send Us a Message</h3>
+
+        <form method="POST" class="row g-3" onsubmit="return validateForm();">
+            <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+
+            <div class="col-md-6">
+                <label class="fw-bold mb-1">Name</label>
+                <input type="text" name="name" class="form-control" placeholder="Your name">
+            </div>
+
+            <div class="col-md-6">
+                <label class="fw-bold mb-1">Email</label>
+                <input type="email" name="email" class="form-control" placeholder="email@example.com">
+            </div>
+
+            <div class="col-md-6">
+                <label class="fw-bold mb-1">Phone</label>
+                <input type="text" name="phone" class="form-control" placeholder="+234 000 000 0000">
+            </div>
+
+            <div class="col-md-12">
+                <label class="fw-bold mb-1">Message</label>
+                <textarea name="message" class="form-control" rows="5" placeholder="Write your message..."></textarea>
+            </div>
+
+            <div class="col-md-12 text-center mt-3">
+                <button class="btn btn-light px-4 py-2 fw-bold">Send Message</button>
+            </div>
+
+        </form>
+    </div>
+</div>
+
+<!-- ===== GOOGLE MAP ===== -->
+<div class="container mb-5 fade-in">
+    <h3 class="text-center mb-3 fw-bold">Find Us On the Map</h3>
+    <div class="ratio ratio-16x9 shadow-sm rounded">
+        <iframe 
+            src="https://www.google.com/maps?q={{ settings.address|urlencode }}&output=embed"
+            style="border:0; width:100%; height:100%;" 
+            allowfullscreen
+            loading="lazy">
+        </iframe>
+    </div>
+</div>
+
+<!-- ===== FORM VALIDATION SCRIPT ===== -->
+<script>
+function validateForm() {
+    let name = document.querySelector("input[name='name']").value.trim();
+    let email = document.querySelector("input[name='email']").value.trim();
+    let message = document.querySelector("textarea[name='message']").value.trim();
+
+    if (!name || !email || !message) {
+        alert("Please fill all required fields.");
+        return false;
+    }
+    return true;
+}
+</script>
+
+{% endblock %}

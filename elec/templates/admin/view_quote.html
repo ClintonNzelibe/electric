@@ -1,0 +1,28 @@
+{% extends 'admin/admin_base.html' %}
+
+{% block content %}
+<div class="container mt-4">
+    <h2>Quote Request Details</h2>
+    <hr>
+
+    <p><strong>Name:</strong> {{ quote.name }}</p>
+    <p><strong>Email:</strong> {{ quote.email }}</p>
+    <p><strong>Phone:</strong> {{ quote.phone }}</p>
+    <p><strong>Service Type:</strong> {{ quote.service_type }}</p>
+    <p><strong>Location:</strong> {{ quote.location }}</p>
+
+    <p><strong>Description:</strong><br>{{ quote.description }}</p>
+
+    {% if quote.image_filename %}
+        <p><strong>Uploaded Image:</strong></p>
+       <img src="{{ url_for('static', filename='uploads/quotes/' ~ quote.image_filename) }}"
+     class="img-fluid"
+     style="max-width: 450px;">
+
+    {% endif %}
+
+  <a href="{{ url_for('admin.admin_quotes') }}" class="btn btn-secondary mt-3">Back</a>
+
+
+</div>
+{% endblock %}
