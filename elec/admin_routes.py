@@ -261,11 +261,13 @@ def admin_settings():
 
     return render_template("admin/settings.html", settings=settings)
 
-
 @admin_bp.route("/settings/update", methods=["POST"])
 @login_required
 def update_settings():
     settings = Settings.query.first()
+
+    # Debug: print incoming form data
+    print("Form data received:", request.form)
 
     # Company identity
     settings.company_name = request.form.get("company_name")
@@ -284,6 +286,22 @@ def update_settings():
     settings.instagram = request.form.get("instagram")
     settings.twitter = request.form.get("twitter")
     settings.youtube = request.form.get("youtube")
+
+    # Debug: print values before saving
+    print("Settings before commit:", {
+        "company_name": settings.company_name,
+        "slogan": settings.slogan,
+        "about_text": settings.about_text,
+        "phone": settings.phone,
+        "phone_alt": settings.phone_alt,
+        "email": settings.email,
+        "address": settings.address,
+        "whatsapp_number": settings.whatsapp_number,
+        "facebook": settings.facebook,
+        "instagram": settings.instagram,
+        "twitter": settings.twitter,
+        "youtube": settings.youtube,
+    })
 
     # File uploads
     logo = request.files.get("logo")
