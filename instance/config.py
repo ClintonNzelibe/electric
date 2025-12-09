@@ -2,14 +2,16 @@ import os
 
 SECRET_KEY = 'COuT9Mlb1oLA5Q'
 
+
 SECRET_KEY = os.environ.get("SECRET_KEY", "fallback-secret")
 
-# Use Railway full DB URL if available
-SQLALCHEMY_DATABASE_URI = os.environ.get("MYSQL_URL")  # Railway full URL
+db_url = os.environ.get("MYSQL_URL")
 
-# Local fallback for testing
-if not SQLALCHEMY_DATABASE_URI:
-    SQLALCHEMY_DATABASE_URI = "mysql+pymysql://root:powerhouse123@localhost/powerhouse"
+# Fix if someone accidentally uses the old mysql:// format
+if db_url and db_url.startswith("mysql://"):
+    db_url = db_url.replace("mysql://", "mysql+pymysql://", 1)
+
+SQLALCHEMY_DATABASE_URI = db_url
 
 SQLALCHEMY_TRACK_MODIFICATIONS = False
 
@@ -19,7 +21,6 @@ SQLALCHEMY_ENGINE_OPTIONS = {
     "pool_size": 5,
     "max_overflow": 10
 }
-
 
 
 UPLOAD_FOLDER = 'elec/static/uploads/'
