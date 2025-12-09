@@ -2,15 +2,23 @@ import os
 
 SECRET_KEY = 'COuT9Mlb1oLA5Q'
 
-DB_HOST = os.environ.get("DB_HOST", "localhost")
-DB_PORT = int(os.environ.get("DB_PORT", 3306))
-DB_USER = os.environ.get("DB_USER", "root")
-DB_PASSWORD = os.environ.get("DB_PASSWORD", "")
-# Use Railway DB name if available, else local
-DB_NAME = os.environ.get("MYSQLDATABASE", "powerhouse")
+SECRET_KEY = os.environ.get("SECRET_KEY", "fallback-secret")
 
-SQLALCHEMY_DATABASE_URI = f"mysql+pymysql://{DB_USER}:{DB_PASSWORD}@{DB_HOST}:{DB_PORT}/{DB_NAME}"
+# Use Railway full DB URL if available
+SQLALCHEMY_DATABASE_URI = os.environ.get("MYSQL_URL")  # Railway full URL
+
+# Local fallback for testing
+if not SQLALCHEMY_DATABASE_URI:
+    SQLALCHEMY_DATABASE_URI = "mysql+pymysql://root:powerhouse123@localhost/powerhouse"
+
 SQLALCHEMY_TRACK_MODIFICATIONS = False
+
+SQLALCHEMY_ENGINE_OPTIONS = {
+    "pool_pre_ping": True,
+    "pool_recycle": 280,
+    "pool_size": 5,
+    "max_overflow": 10
+}
 
 
 
