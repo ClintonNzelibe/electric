@@ -1,8 +1,7 @@
 import os
 
 SECRET_KEY = 'COuT9Mlb1oLA5Q'
-SQLALCHEMY_DATABASE_URI='mysql+mysqlconnector://root@localhost/powerhouse'
-SQLALCHEMY_TRACK_MODIFICATIONS=False
+
 
 DB_HOST = os.environ.get("DB_HOST")
 DB_PORT = int(os.environ.get("DB_PORT", 3306))
